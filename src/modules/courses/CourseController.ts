@@ -28,7 +28,10 @@ export class CourseController {
   static async getCourseById(req: Request, res: Response) {
     try {
       const course = await courseService.getCourseById(req.params.id);
-      if (!course) return res.status(404).json({ error: "Course not found" });
+      if (!course) {
+        res.status(404).json({ error: "Course not found" });
+        return;
+        }
 
       res.status(200).json(course);
     } catch (error) {
@@ -39,7 +42,10 @@ export class CourseController {
   static async updateCourse(req: Request, res: Response) {
     try {
       const course = await courseService.updateCourse(req.params.id, req.body);
-      if (!course) return res.status(404).json({ error: "Course not found" });
+      if (!course) {
+        res.status(404).json({ error: "Course not found" });
+        return;
+        }
 
       res.status(200).json(course);
     } catch (error) {
@@ -49,8 +55,11 @@ export class CourseController {
 
   static async deleteCourse(req: Request, res: Response) {
     try {
-      const success = await courseService.deleteCourse(req.params.id);
-      if (!success) return res.status(404).json({ error: "Course not found" });
+      const course = await courseService.deleteCourse(req.params.id);
+      if (!course) {
+        res.status(404).json({ error: "Course not found" });
+        return;
+        }
 
       res.status(200).json({ message: "Course deleted successfully" });
     } catch (error) {
