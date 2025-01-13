@@ -1,18 +1,20 @@
-import { Request, Response, NextFunction } from 'express';
-import jwt from 'jsonwebtoken';
-
-const JWT_SECRET = process.env.JWT_SECRET || 'secret';
+import { Request, Response, NextFunction } from "express";
+import { JWTUtils } from "../../../utils/JWTUtil";
 
 export const authenticate = (req: Request, res: Response, next: NextFunction) => {
-  const token = req.headers.authorization?.split(' ')[1];
+  const authHeader = req.headers.authorization;
 
-  if (!token) return res.status(401).json({ error: 'Unauthorized' });
-
-  try {
-    const payload = jwt.verify(token, JWT_SECRET);
-    (req as any).user = payload;
-    next();
-  } catch {
-    res.status(403).json({ error: 'Forbidden' });
+  if (!authHeader) {
+    return res.status(401).json({ error: "Unauthorized" });
   }
+
+  const token = authHeader.split(" ")[1];
+  const decoded = JWTUtils.verifyToken(token);
+
+  if (!decoded) {
+    return res.status(401).json({ error: "Invalid or expired token" });
+  }
+
+  (req as any).user = decoded;
+  next();
 };
