@@ -15,4 +15,12 @@ export class UserRepository implements IUserRepository {
         const newUser = new UserModel(user);
         return newUser.save();
     }
+
+    async update(id: string, updates: Partial<IUser>): Promise<IUser | null> {
+        return UserModel.findByIdAndUpdate(id, updates, { new: true });
+    }
+
+    async delete(id: string): Promise<boolean | null> {
+        return UserModel.findByIdAndDelete(id);
+    }
 }
