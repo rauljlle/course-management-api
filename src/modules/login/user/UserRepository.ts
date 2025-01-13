@@ -1,5 +1,5 @@
 import { IUserRepository } from "./IUserRepository";
-import UserModel from "./userModel"
+import UserModel from "./UserModel"
 import IUser from "./IUser";
 
 export class UserRepository implements IUserRepository {
