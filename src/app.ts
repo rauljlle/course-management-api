@@ -19,19 +19,16 @@ app.use("/courses", coursesRoutes);
 try{
     connectInMemoryDB();
 
-    UserModel.create({
-        email: "admin@admin.com",
-        name: "admin",
-        username: "admin",
-        password: "admin"
-    });
-
-    app.listen(PORT, () => {
-        console.log(`Server running on http://localhost:${PORT}`);
-    });
+    if(process.env.NODE_ENV !== 'test'){
+        app.listen(PORT, () => {
+            console.log(`Server running on http://localhost:${PORT}`);
+        });
+    }
 }
 catch(error){
     if (error instanceof Error){
         console.log(error.message);
     }
 }
+
+export default app;

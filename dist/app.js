@@ -16,12 +16,15 @@ app.use("/login", routes_1.default);
 app.use("/courses", routes_2.default);
 try {
     (0, DBConnector_1.connectInMemoryDB)();
-    app.listen(PORT, () => {
-        console.log(`Server running on http://localhost:${PORT}`);
-    });
+    if (process.env.NODE_ENV !== 'test') {
+        app.listen(PORT, () => {
+            console.log(`Server running on http://localhost:${PORT}`);
+        });
+    }
 }
 catch (error) {
     if (error instanceof Error) {
         console.log(error.message);
     }
 }
+exports.default = app;

@@ -14,6 +14,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MongoDBConnection = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
+const AuthService_1 = require("../modules/login/auth/AuthService");
+const UserRepository_1 = require("../modules/login/user/UserRepository");
 class MongoDBConnection {
     constructor() {
         this.connected = false;
@@ -31,6 +33,12 @@ class MongoDBConnection {
             try {
                 yield mongoose_1.default.connect(uri);
                 this.connected = true;
+                const ur = new UserRepository_1.UserRepository;
+                const as = new AuthService_1.AuthService(ur);
+                yield as.register({ email: "admin@admin.com",
+                    name: "admin",
+                    username: "admin",
+                    password: "admin" });
                 console.log("Connected to MongoDB");
             }
             catch (error) {
