@@ -1,6 +1,7 @@
 import { IUserRepository } from "./interfaces/IUserRepository";
 import UserModel from "./UserModel"
 import IUser from "./interfaces/IUser";
+import IUserCreationDTO from "./interfaces/IUserCreationDTO";
 
 export class UserRepository implements IUserRepository {
     async findByEmail(email: string): Promise<IUser | null> {
@@ -11,7 +12,7 @@ export class UserRepository implements IUserRepository {
       return UserModel.findOne({ username });
     }
 
-    async create(user: Partial<IUser>): Promise<IUser> {
+    async create(user: IUserCreationDTO): Promise<IUser> {
         const newUser = new UserModel(user);
         return newUser.save();
     }
