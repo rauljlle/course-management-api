@@ -1,6 +1,6 @@
-import { IUserRepository } from "./IUserRepository";
+import { IUserRepository } from "./interfaces/IUserRepository";
 import UserModel from "./UserModel"
-import IUser from "./IUser";
+import IUser from "./interfaces/IUser";
 
 export class UserRepository implements IUserRepository {
   async findByEmail(email: string): Promise<IUser | null> {
