@@ -1,7 +1,7 @@
-import IUser from "../../user/interfaces/IUser";
+import IUserCreationDTO from "../../user/interfaces/IUserCreationDTO";
 import IAuthDTO from "./IAuthDTO";
 
 export interface IAuthService {
     login(loginData: IAuthDTO): Promise<string>;
-    register(userData: IUser): Promise<string>;
+    register(userData: IUserCreationDTO): Promise<string>;
   }  
