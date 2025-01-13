@@ -3,7 +3,6 @@ import CourseModel from "./CourseModel";
 import ICourse from "./interfaces/ICourse";
 import { ICourseRepository } from "./interfaces/ICourseRepository";
 
-
 export class CourseRepository implements ICourseRepository {
   async create(course: Partial<ICourse>): Promise<ICourse> {
     return CourseModel.create(course);

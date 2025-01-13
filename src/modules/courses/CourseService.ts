@@ -17,7 +17,10 @@ export class CourseService {
     return this.courseRepository.findById(id);
   }
 
-  async updateCourse(id: string, updates: Partial<ICourse>): Promise<ICourse | null> {
+  async updateCourse(
+    id: string,
+    updates: Partial<ICourse>,
+  ): Promise<ICourse | null> {
     return this.courseRepository.update(id, updates);
   }
 

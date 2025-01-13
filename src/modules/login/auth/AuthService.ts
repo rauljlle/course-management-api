@@ -10,7 +10,10 @@ export class AuthService implements IAuthService {
 
   async login(loginData: IAuthDTO): Promise<string> {
     const user = await this.userRepository.findByEmail(loginData.email);
-    if (!user || !(await PasswordUtils.comparePasswords(loginData.password, user.password))) {
+    if (
+      !user ||
+      !(await PasswordUtils.comparePasswords(loginData.password, user.password))
+    ) {
       throw new Error("Invalid email or password");
     }
 
@@ -18,12 +21,16 @@ export class AuthService implements IAuthService {
   }
 
   async register(userData: IUserCreationDTO): Promise<string> {
-    const existingUserEmail = await this.userRepository.findByEmail(userData.email);
+    const existingUserEmail = await this.userRepository.findByEmail(
+      userData.email,
+    );
     if (existingUserEmail) {
       throw new Error("Email already in use");
     }
 
-    const existingUsername = await this.userRepository.findByUsername(userData.username);
+    const existingUsername = await this.userRepository.findByUsername(
+      userData.username,
+    );
     if (existingUsername) {
       throw new Error("Username already in use");
     }

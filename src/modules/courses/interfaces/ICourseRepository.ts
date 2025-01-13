@@ -1,7 +1,6 @@
 import ICourse from "./ICourse";
 import ICourseCreationDTO from "./ICourseCreationDTO";
 
-
 export interface ICourseRepository {
   create(course: ICourseCreationDTO): Promise<ICourse>;
   findAll(filters?: Partial<ICourse>): Promise<ICourse[]>;

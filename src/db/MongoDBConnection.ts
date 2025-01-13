@@ -21,14 +21,14 @@ export class MongoDBConnection {
     try {
       await mongoose.connect(uri);
       this.connected = true;
-      const ur = new UserRepository;
+      const ur = new UserRepository();
       const as = new AuthService(ur);
-      await as.register(
-        {email: "admin@admin.com",
+      await as.register({
+        email: "admin@admin.com",
         name: "admin",
         username: "admin",
-        password: "admin"}
-      )
+        password: "admin",
+      });
       console.log("Connected to MongoDB");
     } catch (error) {
       console.error("Failed to connect to MongoDB", error);

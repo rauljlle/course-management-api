@@ -2,7 +2,11 @@ import { Request, Response, NextFunction } from "express";
 import { JWTUtils } from "../../../utils/JWTUtil";
 import { JwtPayload } from "jsonwebtoken";
 
-export const authenticate = (req: Request, res: Response, next: NextFunction) => {
+export const authenticate = (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   const authHeader = req.headers.authorization;
 
   if (!authHeader) {
@@ -17,7 +21,7 @@ export const authenticate = (req: Request, res: Response, next: NextFunction) =>
   }
 
   interface userReq extends Request {
-    user: string | JwtPayload
+    user: string | JwtPayload;
   }
 
   (req as userReq).user = decoded;

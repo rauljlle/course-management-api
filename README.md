@@ -1,6 +1,7 @@
 # Course Management API
 
 ## Overview
+
 The Course Management API is a backend application built using Node.js, TypeScript, Express.js, and MongoDB. It allows authenticated users to manage courses by providing endpoints to create, read, update, and delete course records. The application follows SOLID principles, ensuring scalability and maintainability.
 
 ---
@@ -33,6 +34,7 @@ The Course Management API is a backend application built using Node.js, TypeScri
 ## Installation
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/rauljlle/course-management-api.git
    cd course-management-api
@@ -40,13 +42,16 @@ The Course Management API is a backend application built using Node.js, TypeScri
 
 2. Set up environment variables:
    Create a `.env` file in the root directory with the following variables:
+
    ```env
    PORT=3000
    JWT_SECRET=your_jwt_secret
    ```
+
    There's an .env-example in the project folder if you need a reference
 
 3. With docker installed, run:
+
    ```bash
    docker compose up -d --build
    ```
@@ -60,6 +65,7 @@ The Course Management API is a backend application built using Node.js, TypeScri
 ### Authentication
 
 #### Login
+
 - **POST** `/login`
 - **Request Body**:
   ```json
@@ -75,17 +81,18 @@ The Course Management API is a backend application built using Node.js, TypeScri
   }
   ```
 - **OBS**:
-    There is an user already created, and those are its credentials:
-    ```json
-    {
-        "email": "admin@admin.com",
-        "name": "admin",
-        "username": "admin",
-        "password": "admin"
-    }
-    ```
+  There is an user already created, and those are its credentials:
+  ```json
+  {
+    "email": "admin@admin.com",
+    "name": "admin",
+    "username": "admin",
+    "password": "admin"
+  }
+  ```
 
 #### Logon
+
 - **POST** `/login/register`
 - **Request Body**:
   ```json
@@ -103,10 +110,10 @@ The Course Management API is a backend application built using Node.js, TypeScri
   }
   ```
 
-
 ### Courses (Protected Routes)
 
 #### Create a Course
+
 - **POST** `/courses`
 - **Headers**:
   ```
@@ -123,6 +130,7 @@ The Course Management API is a backend application built using Node.js, TypeScri
   ```
 
 #### Get All Courses
+
 - **GET** `/courses`
 - **Headers**:
   ```
@@ -133,6 +141,7 @@ The Course Management API is a backend application built using Node.js, TypeScri
   - `instructor` (filter by instructor)
 
 #### Get a Course by ID
+
 - **GET** `/courses/:id`
 - **Headers**:
   ```
@@ -140,6 +149,7 @@ The Course Management API is a backend application built using Node.js, TypeScri
   ```
 
 #### Update a Course
+
 - **PUT** `/courses/:id`
 - **Headers**:
   ```
@@ -156,6 +166,7 @@ The Course Management API is a backend application built using Node.js, TypeScri
   ```
 
 #### Delete a Course
+
 - **DELETE** `/courses/:id`
 - **Headers**:
   ```
@@ -167,6 +178,7 @@ The Course Management API is a backend application built using Node.js, TypeScri
 ## Running Tests
 
 Run unit tests using Jest:
+
 ```bash
 npm run test
 ```

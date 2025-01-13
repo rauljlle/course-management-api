@@ -15,18 +15,16 @@ app.use(express.json());
 app.use("/login", authRoutes);
 app.use("/courses", coursesRoutes);
 
+try {
+  connectInMemoryDB();
 
-try{
-    connectInMemoryDB();
-
-    if(process.env.NODE_ENV !== 'test'){
-        app.listen(PORT, () => {
-            console.log(`Server running on http://localhost:${PORT}`);
-        });
-    }
-}
-catch(error){
-    console.log(getErrorMessage(error));
+  if (process.env.NODE_ENV !== "test") {
+    app.listen(PORT, () => {
+      console.log(`Server running on http://localhost:${PORT}`);
+    });
+  }
+} catch (error) {
+  console.log(getErrorMessage(error));
 }
 
 export default app;

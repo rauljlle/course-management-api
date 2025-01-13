@@ -6,13 +6,12 @@ import { getErrorMessage } from "../../utils/ErrorMessageUtil";
 const courseService = new CourseService(new CourseRepository());
 
 export class CourseController {
-
   static async createCourse(req: Request, res: Response) {
     try {
       const course = await courseService.createCourse(req.body);
       res.status(201).json(course);
     } catch (error) {
-      res.status(500).json( {error: getErrorMessage(error)} );
+      res.status(500).json({ error: getErrorMessage(error) });
     }
   }
 
@@ -22,7 +21,7 @@ export class CourseController {
       const courses = await courseService.getCourses(filters);
       res.status(200).json(courses);
     } catch (error) {
-      res.status(500).json( {error: getErrorMessage(error)} );
+      res.status(500).json({ error: getErrorMessage(error) });
     }
   }
 
@@ -32,11 +31,11 @@ export class CourseController {
       if (!course) {
         res.status(404).json({ error: "Course not found" });
         return;
-        }
+      }
 
       res.status(200).json(course);
     } catch (error) {
-      res.status(500).json( {error: getErrorMessage(error)} );
+      res.status(500).json({ error: getErrorMessage(error) });
     }
   }
 
@@ -46,11 +45,11 @@ export class CourseController {
       if (!course) {
         res.status(404).json({ error: "Course not found" });
         return;
-        }
+      }
 
       res.status(200).json(course);
     } catch (error) {
-      res.status(500).json( {error: getErrorMessage(error)} );
+      res.status(500).json({ error: getErrorMessage(error) });
     }
   }
 
@@ -60,11 +59,11 @@ export class CourseController {
       if (!course) {
         res.status(404).json({ error: "Course not found" });
         return;
-        }
+      }
 
       res.status(200).json({ message: "Course deleted successfully" });
     } catch (error) {
-      res.status(500).json( {error: getErrorMessage(error)} );
+      res.status(500).json({ error: getErrorMessage(error) });
     }
   }
 }
