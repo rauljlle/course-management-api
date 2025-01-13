@@ -1,3 +1,4 @@
+import { FilterQuery } from "mongoose";
 import CourseModel from "./CourseModel";
 import ICourse from "./interfaces/ICourse";
 import { ICourseRepository } from "./interfaces/ICourseRepository";
@@ -8,8 +9,8 @@ export class CourseRepository implements ICourseRepository {
     return CourseModel.create(course);
   }
 
-  async findAll(filters: Partial<ICourse> = {}): Promise<ICourse[]> {
-    return await CourseModel.find({filters});
+  async findAll(filters: FilterQuery<ICourse> = {}): Promise<ICourse[]> {
+    return await CourseModel.find(filters);
   }
 
   async findById(id: string): Promise<ICourse | null> {

@@ -31,5 +31,15 @@ class UserRepository {
             return newUser.save();
         });
     }
+    update(id, updates) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return UserModel_1.default.findByIdAndUpdate(id, updates, { new: true });
+        });
+    }
+    delete(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return UserModel_1.default.findByIdAndDelete(id);
+        });
+    }
 }
 exports.UserRepository = UserRepository;

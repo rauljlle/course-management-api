@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import authRoutes from "./modules/login/routes";
+import coursesRoutes from "./modules/courses/routes";
 import { connectInMemoryDB } from "./db/DBConnector";
 
 dotenv.config();
@@ -10,7 +11,8 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 
-app.use("/auth", authRoutes);
+app.use("/login", authRoutes);
+app.use("/courses", coursesRoutes);
 
 
 try{

@@ -5,14 +5,4 @@ services:
     build: .
     ports:
       - '3000:3000'
-    environment:
-      - MONGO_URI=mongodb://mongo:27017/courses
-      - JWT_SECRET=super_secret
-    depends_on:
-      - mongo
-
-  mongo:
-    image: mongo
-    container_name: mongo
-    ports:
-      - '27017:27017'
+    env_file: ".env"
