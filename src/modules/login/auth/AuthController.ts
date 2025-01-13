@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { AuthService } from "./AuthService";
 import { UserRepository } from "../user/UserRepository";
 import IUserCreationDTO from "../user/interfaces/IUserCreationDTO";
+import { getErrorMessage } from "../../../utils/ErrorMessageUtil";
 
 const authService = new AuthService(new UserRepository());
 
@@ -12,9 +13,7 @@ export class AuthController {
       const token = await authService.login({email, password});
       res.status(200).json({ token });
     } catch (error) {
-        if (error instanceof Error) {
-              res.status(400).json({ error: error.message });
-        }
+        res.status(400).json({ error: getErrorMessage(error) });
     }
   }
 
@@ -24,9 +23,7 @@ export class AuthController {
       const token = await authService.register({ email, username, password, name });
       res.status(201).json({ token });
     } catch (error) {
-        if (error instanceof Error) {
-              res.status(400).json({ error: error.message });
-        }
+        res.status(400).json({ error: getErrorMessage(error) });
     }
   }
 }

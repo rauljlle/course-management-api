@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { JWTUtils } from "../../../utils/JWTUtil";
+import { JwtPayload } from "jsonwebtoken";
 
 export const authenticate = (req: Request, res: Response, next: NextFunction) => {
   const authHeader = req.headers.authorization;
@@ -15,6 +16,10 @@ export const authenticate = (req: Request, res: Response, next: NextFunction) =>
     return res.status(401).json({ error: "Invalid or expired token" });
   }
 
-  (req as any).user = decoded;
+  interface userReq extends Request {
+    user: string | JwtPayload
+  }
+
+  (req as userReq).user = decoded;
   next();
 };

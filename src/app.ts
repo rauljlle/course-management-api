@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import authRoutes from "./modules/login/routes";
 import coursesRoutes from "./modules/courses/routes";
 import { connectInMemoryDB } from "./db/DBConnector";
-import UserModel from "./modules/login/user/UserModel";
+import { getErrorMessage } from "./utils/ErrorMessageUtil";
 
 dotenv.config();
 
@@ -26,9 +26,7 @@ try{
     }
 }
 catch(error){
-    if (error instanceof Error){
-        console.log(error.message);
-    }
+    console.log(getErrorMessage(error));
 }
 
 export default app;

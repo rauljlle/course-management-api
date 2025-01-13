@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import UserModel from "../modules/login/user/UserModel";
 import { AuthService } from "../modules/login/auth/AuthService";
 import { UserRepository } from "../modules/login/user/UserRepository";
 
