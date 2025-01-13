@@ -1,15 +1,12 @@
 import express from "express";
 import dotenv from "dotenv";
 import authRoutes from "./modules/login/routes";
-import { MongoDBConnection } from "./db/MongoDBConnection";
-import { MongoMemoryServer } from "mongodb-memory-server";
 import { connectInMemoryDB } from "./db/DBConnector";
 
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const DB_URI = process.env.DB_URI || "";
 
 app.use(express.json());
 

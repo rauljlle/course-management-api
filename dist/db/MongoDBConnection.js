@@ -29,12 +29,7 @@ class MongoDBConnection {
             if (this.connected)
                 return;
             try {
-                yield mongoose_1.default.connect(uri, {
-                    dbName: process.env.DB_NAME,
-                    user: process.env.DB_USER,
-                    pass: process.env.DB_PASS,
-                    sanitizeFilter: true
-                });
+                yield mongoose_1.default.connect(uri);
                 this.connected = true;
                 console.log("Connected to MongoDB");
             }
