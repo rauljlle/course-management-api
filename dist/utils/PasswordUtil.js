@@ -12,25 +12,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = __importDefault(require("express"));
-const dotenv_1 = __importDefault(require("dotenv"));
-const routes_1 = __importDefault(require("./modules/login/routes"));
-const MongoDBConnection_1 = require("./db/MongoDBConnection");
-dotenv_1.default.config();
-const app = (0, express_1.default)();
-const PORT = process.env.PORT || 3000;
-const DB_URI = process.env.DB_URI || "";
-app.use(express_1.default.json());
-app.use("/auth", routes_1.default);
-(() => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        // Initialize MongoDB connection
-        yield MongoDBConnection_1.MongoDBConnection.getInstance().connect(DB_URI);
-        app.listen(PORT, () => {
-            console.log(`Server running on http://localhost:${PORT}`);
+exports.PasswordUtils = void 0;
+const bcrypt_1 = __importDefault(require("bcrypt"));
+class PasswordUtils {
+    static hashPassword(password) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const saltRounds = 10;
+            return bcrypt_1.default.hash(password, saltRounds);
         });
     }
-    catch (error) {
-        console.error("Failed to start the application", error);
+    static comparePasswords(plainPassword, hashedPassword) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return bcrypt_1.default.compare(plainPassword, hashedPassword);
+        });
     }
-}))();
+}
+exports.PasswordUtils = PasswordUtils;

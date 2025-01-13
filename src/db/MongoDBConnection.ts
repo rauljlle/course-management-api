@@ -17,12 +17,7 @@ export class MongoDBConnection {
     if (this.connected) return;
 
     try {
-      await mongoose.connect(uri, {
-        dbName: process.env.DB_NAME,
-        user: process.env.DB_USER,
-        pass: process.env.DB_PASS,
-        sanitizeFilter: true
-      });
+      await mongoose.connect(uri);
       this.connected = true;
       console.log("Connected to MongoDB");
     } catch (error) {

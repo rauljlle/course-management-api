@@ -2,6 +2,8 @@ import express from "express";
 import dotenv from "dotenv";
 import authRoutes from "./modules/login/routes";
 import { MongoDBConnection } from "./db/MongoDBConnection";
+import { MongoMemoryServer } from "mongodb-memory-server";
+import { connectInMemoryDB } from "./db/DBConnector";
 
 dotenv.config();
 
@@ -14,17 +16,14 @@ app.use(express.json());
 app.use("/auth", authRoutes);
 
 
-
-
-(async () => {
-  try {
-    // Initialize MongoDB connection
-    await MongoDBConnection.getInstance().connect(DB_URI);
-
+try{
+    connectInMemoryDB();
     app.listen(PORT, () => {
-      console.log(`Server running on http://localhost:${PORT}`);
+        console.log(`Server running on http://localhost:${PORT}`);
     });
-  } catch (error) {
-    console.error("Failed to start the application", error);
-  }
-})();
+}
+catch(error){
+    if (error instanceof Error){
+        console.log(error.message);
+    }
+}
