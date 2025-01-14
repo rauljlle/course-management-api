@@ -7,10 +7,10 @@ describe("Course Management Endpoints", () => {
 
   beforeAll(async () => {
     const authResponse = await request(app).post("/login/register").send({
-      email: "test@test.com",
-      name: "test",
-      username: "test",
-      password: "test",
+      email: "testCourse@testCourse.com",
+      name: "testCourse",
+      username: "testCourse",
+      password: "testCourse",
     });
     token = authResponse.body.token;
   });

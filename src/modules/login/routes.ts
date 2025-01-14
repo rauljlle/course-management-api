@@ -8,11 +8,19 @@ const { login, register } = AuthController;
 
 const router = Router();
 
-router.use((res, req, next) => {
-  validate(res, req, next);
-});
-
-router.post("/", validateLogin, login);
-router.post("/register", validateUser, register);
+router.post(
+  "/",
+  (req, res, next) => {
+    validate(req, res, next, validateLogin);
+  },
+  login,
+);
+router.post(
+  "/register",
+  (req, res, next) => {
+    validate(req, res, next, validateUser);
+  },
+  register,
+);
 
 export default router;

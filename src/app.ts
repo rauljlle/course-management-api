@@ -4,6 +4,7 @@ import authRoutes from "./modules/login/routes";
 import coursesRoutes from "./modules/courses/routes";
 import { connectInMemoryDB } from "./db/DBConnector";
 import { getErrorMessage } from "./utils/ErrorMessageUtil";
+import { authenticate } from "./modules/login/auth/AuthMiddleware";
 
 dotenv.config();
 
@@ -13,7 +14,13 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 
 app.use("/login", authRoutes);
-app.use("/courses", coursesRoutes);
+app.use(
+  "/courses",
+  (res, req, next) => {
+    authenticate(res, req, next);
+  },
+  coursesRoutes,
+);
 
 try {
   connectInMemoryDB();

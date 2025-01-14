@@ -1,6 +1,6 @@
 import { body } from "express-validator";
 
-export const validateCourse = [
+export const validateCourseCreation = [
   body("title")
     .trim()
     .notEmpty()
@@ -34,3 +34,35 @@ export const validateCourse = [
     .isString()
     .withMessage("Instructor must be a string"),
 ];
+
+export const validateCourseUpdate = [
+    body("title")
+      .trim()
+      .optional()
+      .isString()
+      .withMessage("Title must be a string")
+      .isLength({ min: 3 })
+      .withMessage("Title must be at least 3 characters long"),
+  
+    body("description")
+      .trim()
+      .optional()
+      .isString()
+      .withMessage("Description must be a string")
+      .isLength({ min: 10 })
+      .withMessage("Description must be at least 10 characters long"),
+  
+    body("duration")
+      .isNumeric()
+      .optional()
+      .withMessage("Duration must be a number")
+      .custom((value) => value > 0)
+      .withMessage("Duration must be a positive number"),
+  
+    body("instructor")
+      .trim()
+      .optional()
+      .isString()
+      .withMessage("Instructor must be a string"),
+  ];
+  

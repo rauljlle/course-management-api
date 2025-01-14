@@ -1,7 +1,6 @@
 import { Router } from "express";
-import { authenticate } from "../login/auth/AuthMiddleware";
 import { CourseController } from "./CourseController";
-import { validateCourse } from "./CourseValidator";
+import { validateCourseCreation, validateCourseUpdate } from "./CourseValidator";
 import { validate } from "../../utils/ValidatorUtil";
 
 const { createCourse, getCourses, getCourseById, updateCourse, deleteCourse } =
@@ -9,15 +8,22 @@ const { createCourse, getCourses, getCourseById, updateCourse, deleteCourse } =
 
 const router = Router();
 
-router.use((req, res, next) => {
-  authenticate(req, res, next);
-  validate(req, res, next);
-});
-
-router.post("/", validateCourse, createCourse);
+router.post(
+  "/",
+  (req, res, next) => {
+    validate(req, res, next, validateCourseCreation);
+  },
+  createCourse,
+);
 router.get("/", getCourses);
 router.get("/:id", getCourseById);
-router.put("/:id", validateCourse, updateCourse);
+router.put(
+  "/:id",
+  (req, res, next) => {
+    validate(req, res, next, validateCourseUpdate);
+  },
+  updateCourse,
+);
 router.delete("/:id", deleteCourse);
 
 export default router;
